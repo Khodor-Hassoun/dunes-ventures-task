@@ -8,6 +8,9 @@ function App() {
     axios.get("http://localhost:3002").then((res) => {
       console.log(res.data);
     });
+    axios.get("https://opentdb.com/api.php?amount=1").then((res) => {
+      console.log(res.data);
+    });
   }, []);
   return (
     <div className="bg-red-500">
