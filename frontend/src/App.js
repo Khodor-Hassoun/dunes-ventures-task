@@ -1,34 +1,18 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { useEffect } from "react";
-import axios from "axios";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import SignIn from "./pages/SignIn/SignIn";
+import SignUp from "./pages/SignUp/SignUp";
+import Game from "./pages/Game/Game";
 
 function App() {
-  useEffect(() => {
-    axios.get("http://localhost:3002").then((res) => {
-      console.log(res.data);
-    });
-    axios.get("https://opentdb.com/api.php?amount=1").then((res) => {
-      console.log(res.data);
-    });
-  }, []);
   return (
-    <div className="bg-red-500">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="text-red-800"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<SignIn />}></Route>
+        <Route path="/signup" element={<SignUp />}></Route>
+        <Route path="/game" element={<Game />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
