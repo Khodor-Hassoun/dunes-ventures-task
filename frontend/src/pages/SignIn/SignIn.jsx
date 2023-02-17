@@ -1,3 +1,3 @@
 export default function SignIn() {
-    return <h1>Hello world</h1>
+    return <h1 className="">Hello world</h1>
 }
