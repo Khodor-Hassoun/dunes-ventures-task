@@ -1,16 +1,20 @@
-import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import signIn from "../api/signin";
 
 export default function SignInForm() {
-    const baseURL = process.env.REACT_APP_BASE_URL
+
+    const navigate = useNavigate()
     const { register, handleSubmit } = useForm()
     function submitHandler(data) {
-        console.log(data)
-        axios.post(`${baseURL}/auth/signin`, data)
-            .then(res => {
-                console.log(res.data)
-            })
+        signIn(data).then(res => {
+            console.log(res)
+            navigate("/game")
+        }).catch(e => {
+            console.log(e)
+        })
     }
+
     return (
         <form className="flex flex-col text-black [&>*]:my-2 w-full"
             onSubmit={handleSubmit(submitHandler)}
