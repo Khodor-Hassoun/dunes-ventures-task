@@ -1,4 +1,4 @@
-export default function ScoreBoard({ title }) {
+export default function ScoreBoard({ title, score }) {
     return (
         <div className="flex flex-col justify-center items-center rounded-md overflow-hidden w-[120px]">
             {/* Title */}
@@ -7,7 +7,7 @@ export default function ScoreBoard({ title }) {
             {/* Result */}
             <div className="bg-white text-black w-full flex justify-center items-center overflow-x-auto overflow-hidden">
                 <div className="py-2">
-                    <p className="text-2xl font-black ">10000</p>
+                    <p className="text-2xl font-black ">{score}</p>
                 </div>
             </div>
         </div>

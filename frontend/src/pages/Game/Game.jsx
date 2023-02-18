@@ -1,44 +1,63 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import triviaApi from "../../api/trivaApi"
 import GameNav from "../../components/GameNav"
 
 
 export default function Game() {
+    const [gameQA, setGameQA] = useState({
+        category: "",
+        question: "",
+        difficulty: "",
+        correct_answer: "",
+        incorrect_answers: [],
+    })
+    const [answer, setAnswer] = useState()
+    const [localScore, setLocalScore] = useState(0)
+    const [gloabalScore, setGlobalScore] = useState(0)
+    useEffect(() => {
+        triviaApi().then(res => {
+            console.log(res)
+            setGameQA(res)
+        })
+    }, [])
 
-    // useEffect(() => {
-    //     triviaApi().then(res => {
-    //         console.log(res)
-    //     })
-    // }, [])
+    function handleAnswer(choice) {
+        if (choice !== gameQA.correct_answer) {
+
+        }
+    }
+    if (gameQA.incorrect_answers.length === 0) {
+        return <h1 className="text-2xl">Loading</h1>
+    }
     return (
         <section className="w-full h-screen bg-ming overflow-hidden">
             {/* Scores and user */}
             <div>
-                <GameNav />
+                <GameNav scores={[localScore, gloabalScore]} />
             </div>
 
             {/* Game */}
             <div className="flex flex-col h-full w-full py-2 px-10 mt-10 space-y-20">
                 {/* Question */}
                 <h1 className="text-4xl text-center">
-                    Gordon Freeman, the protagonist of &quot;Half-Life&quot;, is said to have once had a ponytail.
+                    {`${gameQA.question}`}
                 </h1>
 
                 {/* Options */}
-                <div className="flex justify-center w-full">
-                    <div className="grid grid-cols-2 gap-4 w-4/5">
-                        <div className="w-full bg-[#163A5F] py-3 rounded-md">
-                            <p className=" text-center text-lg">2035</p>
-                        </div>
-                        <div className="w-full bg-[#163A5F] py-2 rounded-md">
-                            <p className=" text-center text-lg">2035</p>
-                        </div>
-                        <div className="w-full bg-[#163A5F] py-3 rounded-md">
-                            <p className=" text-center text-lg">2035</p>
-                        </div>
-                        <div className="w-full bg-[#163A5F] py-2 rounded-md">
-                            <p className=" text-center text-lg">2035</p>
-                        </div>
+                <div className="flex flex-col items-center w-full">
+                    <div className="grid grid-cols-2 gap-4 w-4/5 cursor-pointer">
+                        {
+                            gameQA.incorrect_answers.map(answer => (
+                                <div className="w-full bg-[#163A5F] py-3 rounded-md" key={answer} onClick={handleAnswer}>
+                                    <p className=" text-center text-lg">{answer}</p>
+                                </div>
+                            ))
+                        }
+                    </div>
+                    {/* Category and difficulty */}
+                    <div className="flex space-x-4 justify-start w-4/5 mt-4">
+                        <p>{gameQA.category}</p>
+                        <p>Difficulty: {gameQA.difficulty}</p>
                     </div>
                 </div>
 
