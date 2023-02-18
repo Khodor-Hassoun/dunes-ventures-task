@@ -2,7 +2,7 @@ import ScoreBoard from "./ScoreBoard";
 
 export default function GameNav({ scores }) {
     return (
-        <div className="flex justify-between items-center py-2 px-10 bg-[#163A5F]">
+        <div className="flex justify-between items-center py-2 px-10 bg-accent">
             {/* User name */}
             <h1 className="text-3xl">Hello User</h1>
 

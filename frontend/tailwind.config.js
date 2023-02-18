@@ -10,6 +10,10 @@ module.exports = {
       },
       colors: {
         ming: "#0a253b",
+        "background-color": "#1C658C",
+        accent: "#6096B4",
+        danger: "#FE5F55",
+        success: "#59CE8F",
       },
       backgroundImage: {
         sands:

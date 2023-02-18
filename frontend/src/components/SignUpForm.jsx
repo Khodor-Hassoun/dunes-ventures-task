@@ -41,7 +41,7 @@ export default function SignUpForm() {
                 <div className="flex flex-col box-border w-full">
                     <label htmlFor="email" className="text-lg">Email</label>
                     <input name="email" type="text"
-                        className={"border-2 border-black focus:border-red-500 box-border py-2 rounded"}
+                        className={"border-2 border-black focus:border-danger box-border py-2 rounded"}
                         {...register("email", {
                             pattern: {
                                 value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
@@ -56,7 +56,7 @@ export default function SignUpForm() {
                     ></input>
                     {
                         errors.email ?
-                            <p className="text-xs text-red-500">Email Invalid</p>
+                            <p className="text-xs text-danger">Email Invalid</p>
                             : ""
                     }
                 </div>
@@ -76,14 +76,14 @@ export default function SignUpForm() {
                     ></input>
                     {
                         errors.password ?
-                            <p className="text-xs text-red-500">Password Invalid</p>
+                            <p className="text-xs text-danger">Password Invalid</p>
                             : ""
                     }
                 </div>
 
             </div>
             {/* {failedSignIn && <p className="text-xs text-red-500">Something went wrong</p>} */}
-            <button className="w-full bg-ming text-[#EEEEEE] text-lg py-2 rounded">Sign Up</button>
+            <button className="w-full bg-accent text-[#EEEEEE] text-lg py-2 rounded">Sign Up</button>
         </form>
     )
 }
