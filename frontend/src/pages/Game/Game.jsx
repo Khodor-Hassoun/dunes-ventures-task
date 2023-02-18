@@ -17,6 +17,7 @@ export default function Game() {
     const [nextQ, setnextQ] = useState(false)
     const [isSelectedAnswer, setIsSelectedAnswer] = useState(false)
 
+
     useEffect(() => {
         triviaApi().then(res => {
             console.log(res)
@@ -40,7 +41,6 @@ export default function Game() {
         setAnswer('correct')
         setLocalScore(prev => prev + 1)
         setIsSelectedAnswer(true)
-        console.log("corerctttttttttttttttttttttttttttttttt")
     }
     if (gameQA.incorrect_answers.length === 0) {
         return <h1 className="text-2xl">Loading</h1>
@@ -64,7 +64,11 @@ export default function Game() {
                     <div className="grid grid-cols-2 gap-4 w-4/5 cursor-pointer">
                         {
                             gameQA.incorrect_answers.map(answer => (
-                                <div className="w-full bg-[#163A5F] py-3 rounded-md" key={answer} onClick={handleAnswer.bind(this, answer)}>
+                                <div
+                                    // className={`"w-full py-3 rounded-md bg-[#163A5F] "`}
+                                    className={`${isSelectedAnswer ? answer === gameQA.correct_answer ? "w-full py-3 rounded-md bg-[green]" : "w-full py-3 rounded-md bg-[red]" : "w-full py-3 rounded-md bg-[#163A5F]"}`}
+                                    // style={correctStyle}
+                                    key={answer} onClick={handleAnswer.bind(this, answer)}>
                                     <p className=" text-center text-lg">{answer}</p>
                                 </div>
                             ))
