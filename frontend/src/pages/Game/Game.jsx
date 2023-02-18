@@ -43,7 +43,7 @@ export default function Game() {
         setIsSelectedAnswer(true)
     }
     if (gameQA.incorrect_answers.length === 0) {
-        return <h1 className="text-2xl">Loading</h1>
+        return <h1 className="text-2xl flex justify-center h-full items-center text-center">Loading...</h1>
     }
     return (
         <section className="w-full h-screen bg-ming overflow-hidden">

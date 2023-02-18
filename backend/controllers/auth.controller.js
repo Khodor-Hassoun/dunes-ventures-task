@@ -46,7 +46,7 @@ const signup = async (req, res) => {
       all_time_points: 0,
     },
   });
-  res.status(200).json(user);
+  res.status(200).json({ message: "User succesfully created" });
 };
 
 const signin = async (req, res) => {
