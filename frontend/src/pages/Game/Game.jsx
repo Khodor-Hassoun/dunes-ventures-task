@@ -14,17 +14,29 @@ export default function Game() {
     const [answer, setAnswer] = useState()
     const [localScore, setLocalScore] = useState(0)
     const [gloabalScore, setGlobalScore] = useState(0)
+    const [nextQ, setnextQ] = useState(false)
+    const [isSelectedAnswer, setIsSelectedAnswer] = useState(false)
+
     useEffect(() => {
         triviaApi().then(res => {
             console.log(res)
             setGameQA(res)
+            setIsSelectedAnswer(false)
+            setAnswer(undefined)
         })
-    }, [])
+    }, ["", nextQ])
+
+    function handleNextQ() {
+        setnextQ(bool => !bool)
+    }
 
     function handleAnswer(choice) {
         if (choice !== gameQA.correct_answer) {
-
+            setAnswer("wrong")
+            return
         }
+        setAnswer('correct')
+        console.log("corerctttttttttttttttttttttttttttttttt")
     }
     if (gameQA.incorrect_answers.length === 0) {
         return <h1 className="text-2xl">Loading</h1>
@@ -48,7 +60,7 @@ export default function Game() {
                     <div className="grid grid-cols-2 gap-4 w-4/5 cursor-pointer">
                         {
                             gameQA.incorrect_answers.map(answer => (
-                                <div className="w-full bg-[#163A5F] py-3 rounded-md" key={answer} onClick={handleAnswer}>
+                                <div className="w-full bg-[#163A5F] py-3 rounded-md" key={answer} onClick={handleAnswer.bind(this, answer)}>
                                     <p className=" text-center text-lg">{answer}</p>
                                 </div>
                             ))
@@ -63,7 +75,7 @@ export default function Game() {
 
                 {/* Next question */}
                 <div className="flex justify-center">
-                    <button className="py-4 w-3/12 bg-[#163A5F] rounded-md">Next Question</button>
+                    <button className="py-4 w-3/12 bg-[#163A5F] rounded-md" onClick={handleNextQ}>Next Question</button>
                 </div>
             </div>
         </section>
