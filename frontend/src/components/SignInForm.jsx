@@ -3,13 +3,14 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import signIn from "../api/signin";
 
-export default function SignInForm() {
+export default function SignInForm({ setToken }) {
     const [failedSignIn, setFailedSignIn] = useState(false)
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm()
     function submitHandler(data) {
         signIn(data).then(res => {
             console.log(res)
+            setToken(res.token)
             navigate("/game")
         }).catch(e => {
             console.log(e)

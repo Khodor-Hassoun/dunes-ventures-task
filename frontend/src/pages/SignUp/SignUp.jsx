@@ -1,4 +1,3 @@
-import SignInForm from "../../components/SignInForm";
 import { Link } from "react-router-dom";
 import SignUpForm from "../../components/SignUpForm";
 
@@ -12,7 +11,7 @@ export default function SignUp() {
                 <SignUpForm />
                 <span className="my-4 flex flex-col justify-center items-center">
                     Already have an account?
-                    <span className="text-accent"> <Link to="/signup">Click here</Link></span>
+                    <span className="text-accent"> <Link to="/">Click here</Link></span>
                 </span>
             </div>
         </div>

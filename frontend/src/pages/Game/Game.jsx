@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import triviaApi from "../../api/trivaApi"
 import GameNav from "../../components/GameNav"
-
+import React from "react";
+import { TokenContext } from "../../App";
 
 export default function Game() {
+    const token = React.useContext(TokenContext)
     const [gameQA, setGameQA] = useState({
         category: "",
         question: "",
@@ -16,6 +18,7 @@ export default function Game() {
     const [gloabalScore, setGlobalScore] = useState(0)
     const [nextQ, setnextQ] = useState(false)
     const [isSelectedAnswer, setIsSelectedAnswer] = useState(false)
+    console.log(token)
 
 
     useEffect(() => {
