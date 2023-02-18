@@ -46,7 +46,7 @@ const signup = async (req, res) => {
       all_time_points: 0,
     },
   });
-  res.status(200).json(user);
+  res.status(200).json({ message: "User succesfully created" });
 };
 
 const signin = async (req, res) => {
@@ -64,13 +64,14 @@ const signin = async (req, res) => {
     },
   });
   if (!user) {
-    res.json({ message: "user doesnt exist" });
+    res.status(400).json({ message: "user doesnt exist" });
     return;
   }
 
   pwCheck = await bcrypt.compare(password, user.password);
   if (!pwCheck) {
-    res.json({ message: "PW" });
+    res.status(400).json({ message: "PW" });
+    return;
   }
 
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {

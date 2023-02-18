@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello world");
+  res.json({ message: "Hello world" });
 });
 
 const authRoute = require("./routes/auth.route");
