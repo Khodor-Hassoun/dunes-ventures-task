@@ -31,11 +31,15 @@ export default function Game() {
     }
 
     function handleAnswer(choice) {
+        if (isSelectedAnswer) return
         if (choice !== gameQA.correct_answer) {
             setAnswer("wrong")
+            setIsSelectedAnswer(true)
             return
         }
         setAnswer('correct')
+        setLocalScore(prev => prev + 1)
+        setIsSelectedAnswer(true)
         console.log("corerctttttttttttttttttttttttttttttttt")
     }
     if (gameQA.incorrect_answers.length === 0) {
