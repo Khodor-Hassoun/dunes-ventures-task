@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "test";
-  src: url("../public/fonts/Lobster-Regular.ttf");
+  font-family: "Roboto";
+  src: url("../public/fonts/Roboto-Black.ttf");
+}
+html {
+  @apply text-[#EEEEEE];
+  @apply bg-ming;
 }

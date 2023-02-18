@@ -6,8 +6,14 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["test", ...defaultTheme.fontFamily.sans],
-        // test: ["test"],
+        sans: ["Roboto", ...defaultTheme.fontFamily.sans],
+      },
+      colors: {
+        ming: "#0a253b",
+      },
+      backgroundImage: {
+        sands:
+          "url('./resources/images/fabian-kozdon-5ZeooCGNw3s-unsplash.jpg')",
       },
     },
   },
