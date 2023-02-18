@@ -3,9 +3,12 @@ import triviaApi from "../../api/trivaApi"
 import GameNav from "../../components/GameNav"
 import React from "react";
 import { TokenContext } from "../../App";
+import getUser from "../../api/getuser";
+import addPoint from "../../api/addpoint";
 
 export default function Game() {
-    const token = React.useContext(TokenContext)
+    const token = useContext(TokenContext)
+    const [username, setUsername] = useState()
     const [gameQA, setGameQA] = useState({
         category: "",
         question: "",
@@ -27,6 +30,12 @@ export default function Game() {
             setGameQA(res)
             setIsSelectedAnswer(false)
             setAnswer(undefined)
+            getUser(token).then(res => {
+                console.log(res)
+                setUsername(res.data.name)
+            }).catch(e => {
+                console.log("I'll throw you out if not wrong")
+            })
         })
     }, ["", nextQ])
 
@@ -44,9 +53,17 @@ export default function Game() {
         setAnswer('correct')
         setLocalScore(prev => prev + 1)
         setIsSelectedAnswer(true)
+        getUser(token).then(res => {
+            console.log(res)
+        }).catch(e => {
+            console.log("I'll throw you out if not wrong")
+        })
+        addPoint(token).then(res => {
+            setGlobalScore(res.all_time_points)
+        })
     }
     if (gameQA.incorrect_answers.length === 0) {
-        return <div className="text-2xl flex justify-center h-full items-center text-center bg-background-color">
+        return <div className="text-2xl flex justify-center h-screen items-center text-center bg-background-color">
             <h1>Loading...</h1>
         </div>
     }
@@ -54,7 +71,7 @@ export default function Game() {
         <section className="w-full h-screen bg-background-color overflow-hidden">
             {/* Scores and user */}
             <div>
-                <GameNav scores={[localScore, gloabalScore]} />
+                <GameNav scores={[localScore, gloabalScore]} username={username} />
             </div>
 
             {/* Game */}
