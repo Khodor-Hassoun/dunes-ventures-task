@@ -1,7 +1,7 @@
 Hello this a small project that works on the tasks assigned
 ================================================================
 
-It uses Express for the backend and React for the frontend
+It uses Express, MySQL and Prisma ORM for the backend and React and Tailwind CSS for the frontend and JWT for authentication
 ----------------------------------------------------------
 
 Preview on the project
