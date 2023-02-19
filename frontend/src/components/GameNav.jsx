@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import ScoreBoard from "./ScoreBoard";
 
 export default function GameNav({ scores, username }) {

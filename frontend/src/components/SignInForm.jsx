@@ -28,17 +28,6 @@ export default function SignInForm({ setToken }) {
                     <label htmlFor="email" className="text-lg">Email</label>
                     <input name="email" type="text"
                         className={"border-2 border-black focus:border-danger box-border py-2 rounded"}
-                        // {...register("email", {
-                        //     pattern: {
-                        //         value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                        //         message: "Pattern not available"
-                        //     },
-                        //     required: {
-                        //         value: true,
-                        //         message: "Missing Email"
-                        //     }
-
-                        // })}
                         {...register("email")}
                     ></input>
                     {
@@ -52,14 +41,6 @@ export default function SignInForm({ setToken }) {
                 <div className="flex flex-col w-full">
                     <label htmlFor="password" className="text-lg p-0.5">Password</label>
                     <input name="password" type="password" className="border-2 border-black box-border py-2 rounded"
-                        // {...register("password", {
-                        //     required: "Password cannot be empty",
-                        //     minLength: {
-                        //         value: 3,
-                        //         message: "Password too short"
-                        //     },
-
-                        // })}
                         {...register("password")}
                     ></input>
                     {

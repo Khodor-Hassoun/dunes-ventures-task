@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react"
-import triviaApi from "../../api/trivaApi"
-import GameNav from "../../components/GameNav"
-import React from "react";
 import { TokenContext } from "../../App";
+import { useNavigate } from "react-router-dom";
+
+import triviaApi from "../../api/trivaApi"
 import getUser from "../../api/getuser";
 import addPoint from "../../api/addpoint";
+
+import GameNav from "../../components/GameNav"
 
 export default function Game() {
     const token = useContext(TokenContext)
@@ -21,43 +23,48 @@ export default function Game() {
     const [gloabalScore, setGlobalScore] = useState(0)
     const [nextQ, setnextQ] = useState(false)
     const [isSelectedAnswer, setIsSelectedAnswer] = useState(false)
-    console.log(token)
-
+    const navigate = useNavigate()
 
     useEffect(() => {
+        // Call trivia api after every next question button click
         triviaApi().then(res => {
-            console.log(res)
+            // Get the new question and reset the states
             setGameQA(res)
             setIsSelectedAnswer(false)
             setAnswer(undefined)
-            getUser(token).then(res => {
-                console.log(res)
-                setUsername(res.data.name)
-            }).catch(e => {
-                console.log("I'll throw you out if not wrong")
-            })
+        })
+        // Validate user after every next question button click
+        getUser(token).then(res => {
+            // Mostly update the all time score
+            setUsername(res.data.name)
+            setGlobalScore(res.data.all_time_points)
+        }).catch(e => {
+            console.log("I'll throw you out if not wrong")
+            navigate("/")
+
         })
     }, ["", nextQ])
 
+    // Use this to constantly change button state and invoke useEffect
     function handleNextQ() {
         setnextQ(bool => !bool)
     }
 
     function handleAnswer(choice) {
+        // Guard statement: if the user already pressed an option they cannot retry
         if (isSelectedAnswer) return
+
+        // Guard statement: user chose wrong so no extra points
         if (choice !== gameQA.correct_answer) {
             setAnswer("wrong")
             setIsSelectedAnswer(true)
             return
         }
+
+        // Add points and call score api
         setAnswer('correct')
         setLocalScore(prev => prev + 1)
         setIsSelectedAnswer(true)
-        getUser(token).then(res => {
-            console.log(res)
-        }).catch(e => {
-            console.log("I'll throw you out if not wrong")
-        })
         addPoint(token).then(res => {
             setGlobalScore(res.all_time_points)
         })
