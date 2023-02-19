@@ -43,6 +43,15 @@ export default function Game() {
             navigate("/")
 
         })
+        return () => {
+            setGameQA({
+                category: "",
+                question: "",
+                difficulty: "",
+                correct_answer: "",
+                incorrect_answers: [],
+            })
+        }
     }, ["", nextQ])
 
     // Use this to constantly change button state and invoke useEffect
@@ -69,11 +78,7 @@ export default function Game() {
             setGlobalScore(res.all_time_points)
         })
     }
-    if (gameQA.incorrect_answers.length === 0) {
-        return <div className="text-2xl flex justify-center h-screen items-center text-center bg-background-color">
-            <h1>Loading...</h1>
-        </div>
-    }
+
     return (
         <section className="w-full h-screen bg-background-color overflow-hidden">
             {/* Scores and user */}
@@ -82,39 +87,45 @@ export default function Game() {
             </div>
 
             {/* Game */}
-            <div className="flex flex-col h-full w-full py-2 px-10 mt-10 space-y-20">
-                {/* Question */}
-                <h1 className="text-4xl text-center">
-                    {`${gameQA.question}`}
-                </h1>
+            {
+                gameQA.incorrect_answers.length !== 0 ?
+                    <div className="flex flex-col h-full w-full py-2 px-10 mt-10 space-y-20">
+                        {/* Question */}
+                        <h1 className="text-4xl text-center">
+                            {`${gameQA.question}`}
+                        </h1>
 
-                {/* Options */}
-                <div className="flex flex-col items-center w-full">
-                    <div className="grid grid-cols-2 gap-4 w-4/5 cursor-pointer">
-                        {
-                            gameQA.incorrect_answers.map(answer => (
-                                <div
-                                    // className={`"w-full py-3 rounded-md bg-[#163A5F] "`}
-                                    className={`${isSelectedAnswer ? answer === gameQA.correct_answer ? "w-full py-3 rounded-md bg-success" : "w-full py-3 rounded-md bg-danger" : "w-full py-3 rounded-md bg-accent"}`}
-                                    // style={correctStyle}
-                                    key={answer} onClick={handleAnswer.bind(this, answer)}>
-                                    <p className=" text-center text-lg">{answer}</p>
-                                </div>
-                            ))
-                        }
-                    </div>
-                    {/* Category and difficulty */}
-                    <div className="flex space-x-4 justify-start w-4/5 mt-4">
-                        <p>{gameQA.category}</p>
-                        <p>Difficulty: {gameQA.difficulty}</p>
-                    </div>
-                </div>
+                        {/* Options */}
+                        <div className="flex flex-col items-center w-full">
+                            <div className="grid grid-cols-2 gap-4 w-4/5 cursor-pointer">
+                                {
+                                    gameQA.incorrect_answers.map(answer => (
+                                        <div
+                                            className={`${isSelectedAnswer ? answer === gameQA.correct_answer ? "w-full py-3 rounded-md bg-success" : "w-full py-3 rounded-md bg-danger" : "w-full py-3 rounded-md bg-accent"}`}
+                                            key={answer} onClick={handleAnswer.bind(this, answer)}>
+                                            <p className=" text-center text-lg">{answer}</p>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            {/* Category and difficulty */}
+                            <div className="flex space-x-4 justify-start w-4/5 mt-4">
+                                <p>{gameQA.category}</p>
+                                <p>Difficulty: {gameQA.difficulty}</p>
+                            </div>
+                        </div>
 
-                {/* Next question */}
-                <div className="flex justify-center">
-                    <button className="py-4 w-3/12 bg-accent rounded-md" onClick={handleNextQ}>Next Question</button>
-                </div>
-            </div>
+                        {/* Next question */}
+                        <div className="flex justify-center">
+                            <button className="py-4 w-3/12 bg-accent rounded-md" onClick={handleNextQ}>Next Question</button>
+                        </div>
+                    </div>
+                    :
+                    <div className="flex flex-col h-full w-full py-2 px-10 mt-10 space-y-20 justify-center items-center">
+                        <h1 className="text-2xl">Loading...</h1>
+                    </div>
+            }
+
         </section>
     )
 }
