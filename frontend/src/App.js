@@ -1,12 +1,13 @@
-import "./App.css";
-import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createContext, useState } from "react";
+
+import "./App.css";
+
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Game from "./pages/Game/Game";
-import { createContext, useState } from "react";
 
-export const TokenContext = React.createContext();
+export const TokenContext = createContext();
 
 function App() {
   const [token, setToken] = useState(null);

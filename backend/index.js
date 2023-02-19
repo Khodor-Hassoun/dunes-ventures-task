@@ -20,6 +20,9 @@ app.get("/", (req, res) => {
 const authRoute = require("./routes/auth.route");
 app.use("/auth", authRoute);
 
+const userRoute = require("./routes/user.route");
+app.use("/user", userRoute);
+
 app.listen(process.env.SERVER_PORT, () => {
   //   console.log("app running on port 3000");
   console.log(process.env.SERVER_PORT);

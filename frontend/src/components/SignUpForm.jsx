@@ -11,12 +11,9 @@ export default function SignUpForm() {
     function submitHandler(data) {
         signUp(data)
             .then(res => {
-                if (res == 200) {
-                    signIn(data)
-                        .then(res => {
-                            navigate("/game")
-                        })
-                }
+                navigate('/')
+            }).catch(e => {
+                setFailedSignUp(true)
             })
     }
     console.log(errors)
@@ -82,7 +79,7 @@ export default function SignUpForm() {
                 </div>
 
             </div>
-            {/* {failedSignIn && <p className="text-xs text-red-500">Something went wrong</p>} */}
+            {failedSignUp && <p className="text-xs text-red-500">Something went wrong</p>}
             <button className="w-full bg-accent text-[#EEEEEE] text-lg py-2 rounded">Sign Up</button>
         </form>
     )
