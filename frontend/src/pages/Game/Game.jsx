@@ -91,8 +91,7 @@ export default function Game() {
                 gameQA.incorrect_answers.length !== 0 ?
                     <div className="flex flex-col h-full w-full py-2 px-10 mt-10 space-y-20">
                         {/* Question */}
-                        <h1 className="text-4xl text-center">
-                            {`${gameQA.question}`}
+                        <h1 className="text-4xl text-center" dangerouslySetInnerHTML={{ __html: gameQA.question }}>
                         </h1>
 
                         {/* Options */}

@@ -12,6 +12,7 @@ export default function SignInForm({ setToken }) {
             console.log(res)
             setToken(res.token)
             navigate("/game")
+            localStorage.setItem("token", res.token)
         }).catch(e => {
             console.log(e)
             setFailedSignIn(true)
